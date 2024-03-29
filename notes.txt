@@ -3,3 +3,17 @@ Tasks models wont be seen on admin panel cos we've to register
 the models in django admin panel. 
 -do this in apps, admin file. 
 
+--
+for class bases views, 
+1st 
+from django.views.generic.list import ListView
+
+inheriting into the view class, the ListView has all the fucntions of ListView.
+returns back a template with queries set of data
+
+import the view class into urls and call .as_view()(from inherited views) since urlpatterns doesnt take class 
+but only functions. 
+
+by default django ListView looks for template <modelname>_list.html, 
+if not exclusively defined. 
+-----
