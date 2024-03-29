@@ -1,0 +1,5 @@
+once migrations are done, 
+Tasks models wont be seen on admin panel cos we've to register 
+the models in django admin panel. 
+-do this in apps, admin file. 
+
