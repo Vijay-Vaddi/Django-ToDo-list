@@ -1,3 +1,7 @@
+Learn Signals: signal dispatchers. 
+Serializer’s, nest Serializers, 
+Session & Token Authentication - how it works  
+
 once migrations are done, 
 Tasks models wont be seen on admin panel cos we've to register 
 the models in django admin panel. 
@@ -15,5 +19,13 @@ import the view class into urls and call .as_view()(from inherited views) since 
 but only functions. 
 
 by default django ListView looks for template <modelname>_list.html, 
-if not exclusively defined. 
+if not exclusively defined, and passes object as object_list by default 
+
+DetailView - more info on an item 
+.views.generic.detail DetailView
+
+TaskDetail(DetailView)->looks for <modelname>_detail.html
+one object at a time instead of whole list. by primary_key
+view by default looks for pk in url, primary key value in path, so set as int
+
 -----

@@ -3,6 +3,20 @@
 {% block content %}
 
 <h1>My to do list</h1>
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task' task.id %}">View</a></td>
+    </tr>
+    {% empty %}
+    <h3>No items here</h3>
+    {% endfor %}
 
+</table>
 
 {% endblock %}
