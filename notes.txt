@@ -28,4 +28,24 @@ TaskDetail(DetailView)->looks for <modelname>_detail.html
 one object at a time instead of whole list. by primary_key
 view by default looks for pk in url, primary key value in path, so set as int
 
+<a href="{% url 'task' task.id %}">View</a>
+'task'--> name of view in urlpatterns, task.id->passed to <int:pk>
+'task' available throughout application as url for that view class/function.  
 -----
+********** 
+CreateView
+---
+
+looks for task_form.html by default
+CreateView by default gives a ModelForm, class representaion of a form based on a modelname, 
+takes 'model'=Task and creates all the fields. 
+or can set form_class = MyForm for custom form. 
+
+--can list out fields like, fields = ['title', 'description']
+or create all fields with fields='__all__'
+
+have to add redirect after form submission. uses reverse_lazy import from urls 
+success_url = reverse_lazy('tasks') -->name from urlpatterns
+
+sends form=form to template--> {{form}}
+
