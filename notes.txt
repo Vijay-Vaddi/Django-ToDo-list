@@ -49,3 +49,14 @@ success_url = reverse_lazy('tasks') -->name from urlpatterns
 
 sends form=form to template--> {{form}}
 
+*****
+UpdateView
+
+Same as CreateView but gives prefilled form and updates on submit. 
+uses <int:pk> 
+
+***
+DeleteView, renders a 'are you sure?' page and 
+delete on confirm via POST requst 
+
+View looks for <modelname>_confirm_delete.html 
