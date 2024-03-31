@@ -60,3 +60,22 @@ DeleteView, renders a 'are you sure?' page and
 delete on confirm via POST requst 
 
 View looks for <modelname>_confirm_delete.html 
+
+*************
+************* 
+
+Users, Auth. 
+--can check user in inspect, memory, application,cookies, SessionId
+
+*****
+--LoginView
+
+can use LoginView directly, and/or customise it as well. 
+
+-provides default form, can specify fields, 
+-redirect_authenticated_user --> default False, if user is authed, 
+dont allow them on this page
+
+DOUBT: get_success_url(self) why? not just success_url='tasks'
+
+
