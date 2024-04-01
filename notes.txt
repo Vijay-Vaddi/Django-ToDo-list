@@ -78,4 +78,5 @@ dont allow them on this page
 
 DOUBT: get_success_url(self) why? not just success_url='tasks'
 
-
+--can use LogoutView directly in urlpatterns and
+add next_page for redirecting. 
