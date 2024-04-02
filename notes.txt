@@ -80,3 +80,18 @@ DOUBT: get_success_url(self) why? not just success_url='tasks'
 
 --can use LogoutView directly in urlpatterns and
 add next_page for redirecting. 
+
+***
+Restricting views. 
+
+--can use mixin- LoginRequiredMixin
+-use it before the view inheritence 
+--To redirect to login page add LOGIN_URL = 'login'
+
+override get_context_data(self, **kwargs):
+        context = 'to filter the object'
+
+override form_valid(self, form): 
+    check if the form instance user is logged in user 
+    then return model value from view form to create task which has current user 
+    assigned to user. 
