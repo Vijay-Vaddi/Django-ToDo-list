@@ -2,40 +2,76 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
-<p>{{request.user}}</p>
-<form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-<button type="submit">Logout</button>
-</form>
-{%else%}
-<a href="{% url 'login' %}">Log In</a>
-{% endif %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+            <div class="card-body py-4 px-4 px-md-5">
+  
+              <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                <i class="fas fa-check-square me-1"></i>
+                <u>My Todo-s</u>
+              </p>
+              
+              <!-- search and add task -->
+              <div class="pb-2">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-row align-items-center">
+                      <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                        placeholder="Search">
+                      <div>
+                        <a href="{% url 'task-create' %}">
+                        <button type="button" class="btn btn-primary">Add Task</button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <hr class="my-4">
+              <!-- task list items -->
+              {% for task in tasks %}
+              <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                <!-- check box -->
+                <li
+                  class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                  <div class="form-check">
+                    <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
+                      aria-label="..." checked />
+                  </div>
+                </li>
+                <!-- item title -->
+                <li
+                  class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                  <p class="lead fw-normal mb-0">{{task.title}}</p>
+                </li>
+                
+                <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                  <div class="d-flex flex-row justify-content-end mb-1">
+                    <a href="{%url 'task-update' task.id%}" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                        class="fas fa-pencil-alt me-3"></i></a>
+                    <a href="{%url 'task-delete' task.id%}" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                        class="fas fa-trash-alt"></i></a>
+                  </div>
+                  <!-- created date -->
+                  <div class="text-end text-muted">
+                    <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                      <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            {%endfor%}
 
-<hr>
-<h1>My to do list</h1>
-<a href="{% url 'task-create' %}">Create a Task</a>
-<form method="GET">
-    <input type="text" name="search-area" value="{{search_input}}">
-    <input type="submit" value="Submit">
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</form>
-<table>
-    <tr>
-        <th>Items on the list</th>
-        <th></th>
-    </tr>
-    {% for task in tasks %}
-    <tr>
-        <td>{{task.title}}</td>
-        <!-- <td><a href="{% url 'task' task.id %}">View</a></td> -->
-        <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
-        <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
-    </tr>
-    {% empty %}
-    <h3>No items here</h3>
-    {% endfor %}
-
-</table>
-
-{% endblock %}
+  {% endblock %}
