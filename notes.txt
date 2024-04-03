@@ -95,3 +95,9 @@ override form_valid(self, form):
     check if the form instance user is logged in user 
     then return model value from view form to create task which has current user 
     assigned to user. 
+
+*****
+Register page
+
+--inheriting from FormView and using UserRegisterForm
+--can set template_name to custom 'app/asdjks.html'

@@ -1,12 +1,20 @@
+'''For testing class base views'''
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
+
+'''CRUD views'''
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
+'''To Login and retrict pages'''
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+'''To register and login directly'''
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login 
 
 from django.urls import reverse_lazy
 from .models import Task
@@ -22,6 +30,19 @@ class UserLoginView(LoginView):
         return reverse_lazy('tasks')
 
 
+class RegisterUser(FormView):
+    template_name = 'base/register.html'
+    form_class = UserCreationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('tasks')
+
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(RegisterUser, self).form_valid(form)
+
+
 class TaskList(LoginRequiredMixin, ListView):
     
     model = Task
@@ -33,6 +54,7 @@ class TaskList(LoginRequiredMixin, ListView):
         context['count'] = context['tasks'].filter(complete=False).count() 
 
         return context
+
 
 class TaskDetail(LoginRequiredMixin, DetailView):
 
