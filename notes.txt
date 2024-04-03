@@ -101,3 +101,9 @@ Register page
 
 --inheriting from FormView and using UserRegisterForm
 --can set template_name to custom 'app/asdjks.html'
+
+*********
+Search fucntionality
+use Tasklist context to filter out by search-area input from form 
+--filter with title__icontains=search_input for 'contains'
+or title__icontains = search_input for start with function. 
