@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from .forms import TaskForm
 
 '''To Login and retrict pages'''
 from django.contrib.auth.views import LoginView
@@ -74,9 +75,9 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    # fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('tasks')
-
+    form_class = TaskForm
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
@@ -84,7 +85,8 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = fields = ['title', 'description', 'complete']
+    # fields = ['title', 'description', 'complete']
+    form_class = TaskForm
     success_url = reverse_lazy('tasks')
 
 

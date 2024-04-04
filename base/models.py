@@ -25,3 +25,4 @@ class Task(models.Model):
         '''To order model by task completion status
         '''
         ordering = ['complete']
+    

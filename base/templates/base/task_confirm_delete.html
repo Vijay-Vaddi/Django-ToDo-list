@@ -1,15 +1,55 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-<a href="{% url 'tasks' %}">Go back</a>
-<form method="POST" action="">
-    {% csrf_token %}
-    <p>Delete "{{task}}" ?!!</p>
-    {{form.as_p}}
 
-    <input type="submit" value="Delete">
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+                    <div class="card-body py-4 px-4 px-md-5">
+                        <!-- nested row and column -->
 
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1>Hello <i>{{request.user|title}}</h1></i>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                                    <a href="{% url 'tasks' %}">
+                                        <i class="fas fa-check-square me-1"></i>
 
-</form>
+                                        <u>My Todo-s</u></a>
+                                </p>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                {% if request.user.is_authenticated %}
+                                <form method="POST" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Logout</button>
+                                </form>
+                                {%else%}
+                                <a href="{% url 'login' %}">Log In</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- search and add task -->
+                        <h3 style="margin: 0;">
+                            <a href="{% url 'tasks' %}">Go back</a>
+                        </h3>
+                        <hr class="my-4">
+                        <!-- task list items -->
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <p>Delete "{{task}}" ?!!</p>
+                            {{form}}
+                            <button type="submit" value="Delete" class="btn btn-primary ">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

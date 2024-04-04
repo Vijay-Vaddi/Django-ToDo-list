@@ -9,10 +9,11 @@
         <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
           <div class="card-body py-4 px-4 px-md-5">
             <!-- nested row and column -->
+            <div></div>
             <div class="row">
               <div class="col-md-4">
-                <h1>Hello {{request.user|title}}</h1>
-                <h3 style="margin: 0;">There are <i>{{count}}</i> incomplete task{{count|pluralize:"s"}}</h3>
+                <h1>Hello <i>{{request.user|title}}</h1></i>
+                <h4 style="margin: 0;">There are <i>{{count}}</i> incomplete task{{count|pluralize:"s"}}</h4>
               </div>
               <div class="col-md-4">
                 <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
@@ -38,8 +39,9 @@
                   <div class="d-flex flex-row justify-content-between ">
                     <form method="GET" id="form1">
                       <div class="form-outline" data-mdb-input-init>
-                      <input type="search" for="form1" class="form-control form-control-lg" name="search-area" placeholder="Search" value="{{search_input}}" />
-                    </div>
+                        <input type="search" for="form1" class="form-control form-control-lg" name="search-area"
+                          placeholder="Search" value="{{search_input}}" />
+                      </div>
                     </form>
                     <div class="">
                       <a href="{% url 'task-create' %}">
@@ -64,13 +66,15 @@
               </li>
               <!-- item title -->
               <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                <i><s><p class="lead fw-normal mb-0">{{task.title}}</p></s></i>
+                <i><s>
+                    <p class="lead fw-normal mb-0">{{task.title}}</p>
+                  </s></i>
               </li>
               {%else%}
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
-                     />
+                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
+                    aria-label="..." />
                 </div>
               </li>
               <!-- item title -->
@@ -101,5 +105,6 @@
     </div>
   </div>
 </section>
+
 
 {% endblock %}
