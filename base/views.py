@@ -10,10 +10,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 
 '''To Login and retrict pages'''
 from django.contrib.auth.views import LoginView
+from .forms import UserLoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 '''To register and login directly'''
 from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterUserForm
 from django.contrib.auth import login 
 
 from django.urls import reverse_lazy
@@ -23,16 +25,17 @@ from .models import Task
 
 class UserLoginView(LoginView):
     template_name = "base/login.html"
-    fields = "__all__" 
     redirect_authenticated_user = True
-
+    authentication_form = UserLoginForm
+    fields = "__all__" 
+    
     def get_success_url(self) -> str:
         return reverse_lazy('tasks')
 
 
 class RegisterUser(FormView):
     template_name = 'base/register.html'
-    form_class = UserCreationForm
+    form_class = RegisterUserForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tasks')
 

@@ -35,10 +35,13 @@
             <div class="pb-2">
               <div class="card">
                 <div class="card-body">
-                  <div class="d-flex flex-row align-items-center">
-                    <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-                      placeholder="Search">
-                    <div>
+                  <div class="d-flex flex-row justify-content-between ">
+                    <form method="GET" id="form1">
+                      <div class="form-outline" data-mdb-input-init>
+                      <input type="search" for="form1" class="form-control form-control-lg" name="search-area" placeholder="Search" value="{{search_input}}" />
+                    </div>
+                    </form>
+                    <div class="">
                       <a href="{% url 'task-create' %}">
                         <button type="button" class="btn btn-primary">Add Task</button>
                       </a>
@@ -67,16 +70,15 @@
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
                   <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
-                    checked />
+                     />
                 </div>
               </li>
               <!-- item title -->
               <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                 <p class="lead fw-normal mb-0">{{task.title}}</p>
               </li>
-
               {% endif %}
-
+              <!-- edit and delete icons -->
               <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                 <div class="d-flex flex-row justify-content-end mb-1">
                   <a href="{%url 'task-update' task.id%}" class="text-info" data-mdb-toggle="tooltip"
@@ -93,8 +95,6 @@
               </li>
             </ul>
             {%endfor%}
-
-
           </div>
         </div>
       </div>
