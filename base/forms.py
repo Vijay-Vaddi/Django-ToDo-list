@@ -29,3 +29,4 @@ class TaskForm(forms.ModelForm):
             'description':forms.Textarea(attrs={'class':'form-control'}),
             'complete':forms.CheckboxInput(attrs={'class':'form-check-input'}),
         }
+ 
