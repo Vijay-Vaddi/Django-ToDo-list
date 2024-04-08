@@ -106,7 +106,7 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -120,11 +120,12 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <form id = 'confirm-task-done' method="POST" action="">
           {% csrf_token %}
+          <!-- <input type="hidden" name="complete" value="True">  -->
         <button type="submit" class="btn btn-primary">Save changes</button>
       </form>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 {% endblock %}

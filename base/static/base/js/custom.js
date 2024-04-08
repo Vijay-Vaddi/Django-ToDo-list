@@ -4,13 +4,10 @@ $(document).ready(function () {
 
         var a = "{%";
         var b = "url";
-        var c = "task-update";
+        var c = "'task-update'";
         var d = "%}";
-        var update_url = c + "/" + data_task_id;
+        var update_url = a+b+c  + data_task_id +d;
         $('#confirm-task-done').attr('action', update_url);
-
-        $('#confirm-task-done').submit();
-
 
     });
 });

@@ -48,7 +48,24 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-    
+    <script type="text/javascript">
+        $(document).ready(function () {
+    $(document).on('click', '.incomplete-task', function () {
+        var data_task_id = $(this).attr('data-task-id');
+
+        var a = "{%";
+        var b = "url";
+        var c = "task-update";
+        var d = "%}";
+        var update_url = c  + "/"+ data_task_id;
+        $('#confirm-task-done').attr('action', update_url);
+        
+
+    });
+});
+
+
+    </script>
 </body>
 
 </html>
