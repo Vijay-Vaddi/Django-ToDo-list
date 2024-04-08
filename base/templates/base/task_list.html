@@ -60,7 +60,7 @@
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
                   <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
-                  data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id="{task.id}" checked disabled />
+                  data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id={{task.id}} checked disabled />
                 </div>
               </li>
               <!-- item title -->
@@ -72,8 +72,8 @@
               {%else%}
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
-                    aria-label="..." data-bs-toggle="modal" data-bs-target="#exampleModal" />
+                  <input class="form-check-input me-0 incomplete-task" type="checkbox" value="" id="flexCheckChecked1"
+                    aria-label="..." data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id={{task.id}} />
                 </div>
               </li>
               <!-- item title -->
@@ -118,9 +118,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <form method="" action="">
+        <form id = 'confirm-task-done' method="POST" action="">
           {% csrf_token %}
-        <button type="submit" class="btn btn-primary"><a href="{%url 'task-update' 5%}">Save changes</a></button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </form>
       </div>
     </div>
