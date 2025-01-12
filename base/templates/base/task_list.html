@@ -59,7 +59,7 @@
               <!-- check box -->
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input onclick="assignIdToModal(event, this.dataset.task-id)" class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
+                  <input onclick="assignIdToModal(event, this.dataset.task-id)" class="form-check-input me-0" type="checkbox" value="" id="checkbox-{{task.id}}" aria-label="..."
                   data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id={{task.id}} checked disabled />
                 </div>
               </li>
@@ -72,7 +72,7 @@
               {%else%}
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input onclick="assignIdToModal(event, this.dataset.task_id)" class="form-check-input me-0 incomplete-task" type="checkbox" value="" id="flexCheckChecked1"
+                  <input onclick="assignIdToModal(event, this.dataset.task_id)" class="form-check-input me-0 incomplete-task" type="checkbox" value="" id="checkbox-{{task.id}}"
                     aria-label="..." data-bs-toggle="modal" data-bs-target="#exampleModal" data-task_id={{task.id}} />
                 </div>
               </li>
@@ -115,7 +115,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <form onsubmit="taskDone(event, this.dataset.taskId);" id ='confirm-task-done' method="PUT" action="#">
           {% csrf_token %}
-          <!-- <input type="hidden" name="complete" value="True">  -->
+          <!-- need to submit task.complete = True -->
+          <input type="hidden" name="complete" value="True">
         <button type="submit" class="btn btn-primary">Save changes</button>
       </form>
       </div>
@@ -132,11 +133,34 @@
     modalForm.dataset.taskId = id;
   }
 
-  
+  // call endpoint to make patch update for task complete
   async function taskDone(event, id) {
     event.preventDefault();
-    console.log('id is ',id)
+    const form = event.target;
+    const response = await fetch(`/api/task/${id}/`,
+      {
+        method:'PATCH',
+        headers:{
+          'Content-type':'application/json',
+          "X-CSRFToken": " {{ csrf_token }} ",
+        },
+        body:JSON.stringify({ complete: true })
+      }
+      )
 
+      if (!response.ok){
+        throw new Error("Something went wrong", response.statusText);
+      }else{
+        // close modal and disable and add checked tic to checkbox
+        const result = await response.json();
+        console.log("Everyone went ok", response.status);
+        const modal=document.getElementById("exampleModal");
+        bootstrap.Modal.getInstance(document.getElementById("exampleModal")).hide();
+        id = result.id;
+        const checkBox = document.getElementById(`checkbox-${id}`);
+        checkBox.disabled = true;
+        checkBox.checked = true;
+    }
   }
 
 
