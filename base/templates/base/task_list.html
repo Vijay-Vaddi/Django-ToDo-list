@@ -59,7 +59,7 @@
               <!-- check box -->
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
+                  <input onclick="assignIdToModal(event, this.dataset.task-id)" class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1" aria-label="..."
                   data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id={{task.id}} checked disabled />
                 </div>
               </li>
@@ -72,8 +72,8 @@
               {%else%}
               <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                 <div class="form-check">
-                  <input class="form-check-input me-0 incomplete-task" type="checkbox" value="" id="flexCheckChecked1"
-                    aria-label="..." data-bs-toggle="modal" data-bs-target="#exampleModal" data-task-id={{task.id}} />
+                  <input onclick="assignIdToModal(event, this.dataset.task_id)" class="form-check-input me-0 incomplete-task" type="checkbox" value="" id="flexCheckChecked1"
+                    aria-label="..." data-bs-toggle="modal" data-bs-target="#exampleModal" data-task_id={{task.id}} />
                 </div>
               </li>
               <!-- item title -->
@@ -113,7 +113,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <form data-task_id="{{task.id}}" onsubmit="taskDone(event, this.dataset.task_id);" id ='confirm-task-done' method="PUT" action="#">
+        <form onsubmit="taskDone(event, this.dataset.taskId);" id ='confirm-task-done' method="PUT" action="#">
           {% csrf_token %}
           <!-- <input type="hidden" name="complete" value="True">  -->
         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -124,10 +124,20 @@
 </div>
 
 <script>
-async function taskDone(event, id) {
-  event.preventDefault();
-  console.log('id is ',id)
-}
+
+  // assign id to modal form
+  async function assignIdToModal(event, id) {
+    event.preventDefault();
+    const modalForm=document.getElementById("confirm-task-done");
+    modalForm.dataset.taskId = id;
+  }
+
+  
+  async function taskDone(event, id) {
+    event.preventDefault();
+    console.log('id is ',id)
+
+  }
 
 
 </script>
