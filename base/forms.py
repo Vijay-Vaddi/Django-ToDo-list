@@ -5,7 +5,7 @@ from .models import Task
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control form-control-lg'})
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
 
 
         self.fields['password'].widget.attrs.update({'class': 'form-control'})
@@ -13,7 +13,7 @@ class UserLoginForm(AuthenticationForm):
 class RegisterUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control form-control-lg'})
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
 
 
         self.fields['password1'].widget.attrs.update({'class': 'form-control'})
@@ -29,4 +29,3 @@ class TaskForm(forms.ModelForm):
             'description':forms.Textarea(attrs={'class':'form-control'}),
             'complete':forms.CheckboxInput(attrs={'class':'form-check-input'}),
         }
- 

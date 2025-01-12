@@ -125,7 +125,6 @@
 </div>
 
 <script>
-
   // assign id to modal form
   async function assignIdToModal(event, id) {
     event.preventDefault();
@@ -162,14 +161,7 @@
         checkBox.checked = true;
         const taskTitleElement = document.getElementById(`task-title-${id}`);
         taskTitleElement.innerHTML = `<i><s><p class="lead fw-normal mb-0">${taskTitleElement.textContent}</p></s></i>`;
-
-
     }
   }
-
-
 </script>
-
-
-
 {% endblock %}
